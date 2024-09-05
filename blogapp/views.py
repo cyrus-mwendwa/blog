@@ -1,7 +1,7 @@
-from django.views.generic import TemplateView , DetailView , FormView ,ListView ,UpdateView
+from django.views.generic import TemplateView , DetailView , FormView ,ListView ,UpdateView , CreateView
 from django.shortcuts import get_object_or_404, redirect
 from .models import Post, Category , Comment , Like
-from .forms import CommentForm ,CustomUserCreationForm, CustomAuthenticationForm, ProfileUpdateForm
+from .forms import CommentForm ,CustomUserCreationForm, CustomAuthenticationForm, PostForm, ProfileUpdateForm
 from django.shortcuts import render , redirect
 from django.db.models import Q
 from .models import Post, Category , Profile
@@ -241,3 +241,22 @@ class CustomLogoutView(View):
     def get(self, request, *args, **kwargs): 
         logout(request) 
         return HttpResponseRedirect(reverse('home'))
+    
+    
+class PostCreateView(LoginRequiredMixin , CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'create_post.html'
+    success_url = reverse_lazy('filter_posts')  # Redirect to a post list or detail page after successful creation
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    
+class PostCreateVuewP(LoginRequiredMixin , CreateView):
+    model = Post 
+    form_class = PostForm
+    template_name = 'create_ppost.html'
+    success_url =  reverse_lazy('filter_posts')
+    

@@ -1,7 +1,8 @@
 from django import forms
-from .models import Comment , Profile
+from .models import Comment , Profile ,Post
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from ckeditor.widgets import CKEditorWidget
 
 
 class CommentForm(forms.ModelForm):
@@ -56,4 +57,17 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['image']
         widgets = {
             'image': forms.ClearableFileInput(attrs={'class': 'form-input mt-1 block w-full', 'multiple': False}),
+        }
+        
+        
+class PostForm(forms.ModelForm):
+    content = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = Post
+        fields = ['title', 'category', 'content', 'image']
+        widgets = {
+            'category': forms.Select(attrs={
+                'class': 'w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#e87a00]',
+            }),
         }

@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'blogapp',
-    'tailwind',
+    'tailwind', 
     'theme'
 ]
 

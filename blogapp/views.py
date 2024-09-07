@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.contrib import messages
 from django.http import HttpResponseRedirect, JsonResponse
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST;
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin

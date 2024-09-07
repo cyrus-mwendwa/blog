@@ -153,6 +153,9 @@ class FilterPostsView(ListView):
         return Post.objects.filter(filters).distinct()
     
     def get_context_data(self, **kwargs):
+        """
+        Override the get_context_data method to include categories and authors in the context.
+        """
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['authors'] = User.objects.all()

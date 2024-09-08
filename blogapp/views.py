@@ -263,3 +263,4 @@ class PostCreateVuewP(LoginRequiredMixin , CreateView):
     template_name = 'create_ppost.html'
     success_url =  reverse_lazy('filter_posts')
     
+ 
